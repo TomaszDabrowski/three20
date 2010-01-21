@@ -89,7 +89,7 @@ static const NSInteger kActivityLabelTag = 96;
       TTLocalizedString(@"%d of %d", @"Current page in photo browser (1 of 10)"),
       _centerPhotoIndex+1, _photoSource.numberOfPhotos];
   }
-
+/*
   if (![self.ttPreviousViewController isKindOfClass:[TTThumbsViewController class]]) {
     if (_photoSource.numberOfPhotos > 1) {
       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
@@ -98,23 +98,23 @@ static const NSInteger kActivityLabelTag = 96;
     } else {
       self.navigationItem.rightBarButtonItem = nil;
     }
-  } else {
+  } else {*/
     self.navigationItem.rightBarButtonItem = nil;
-  }
+  //}
 
-  UIBarButtonItem* playButton = [_toolbar itemWithTag:1];
+ /* UIBarButtonItem* playButton = [_toolbar itemWithTag:1];
   playButton.enabled = _photoSource.numberOfPhotos > 1;
   _previousButton.enabled = _centerPhotoIndex > 0;
-  _nextButton.enabled = _centerPhotoIndex >= 0 && _centerPhotoIndex < _photoSource.numberOfPhotos-1;
-}
+  _nextButton.enabled = _centerPhotoIndex >= 0 && _centerPhotoIndex < _photoSource.numberOfPhotos-1;*/
+ }
 
 - (void)updateToolbarWithOrientation:(UIInterfaceOrientation)interfaceOrientation {
   if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
-    _toolbar.height = TT_TOOLBAR_HEIGHT;
+    //_toolbar.height = TT_TOOLBAR_HEIGHT;
   } else {
-    _toolbar.height = TT_LANDSCAPE_TOOLBAR_HEIGHT+1;
+   // _toolbar.height = TT_LANDSCAPE_TOOLBAR_HEIGHT+1;
   }
-  _toolbar.top = self.view.height - _toolbar.height;
+ // _toolbar.top = self.view.height - _toolbar.height;
 }
 
 - (void)updatePhotoView {
@@ -253,7 +253,7 @@ static const NSInteger kActivityLabelTag = 96;
       UIBarButtonSystemItemPause target:self action:@selector(pauseAction)] autorelease];
     pauseButton.tag = 1;
     
-    [_toolbar replaceItemWithTag:1 withItem:pauseButton];
+//    [_toolbar replaceItemWithTag:1 withItem:pauseButton];
 
     _slideshowTimer = [NSTimer scheduledTimerWithTimeInterval:kSlideshowInterval
       target:self selector:@selector(slideshowTimer) userInfo:nil repeats:YES];
@@ -266,7 +266,7 @@ static const NSInteger kActivityLabelTag = 96;
       UIBarButtonSystemItemPlay target:self action:@selector(playAction)] autorelease];
     playButton.tag = 1;
     
-    [_toolbar replaceItemWithTag:1 withItem:playButton];
+//    [_toolbar replaceItemWithTag:1 withItem:playButton];
 
     [_slideshowTimer invalidate];
     _slideshowTimer = nil;
@@ -308,6 +308,7 @@ static const NSInteger kActivityLabelTag = 96;
 - (id)initWithPhotoSource:(id<TTPhotoSource>)photoSource {
   if (self = [self init]) {
     self.photoSource = photoSource;
+	 // self.startIndex = index;
   }
   return self;
 }
@@ -319,11 +320,11 @@ static const NSInteger kActivityLabelTag = 96;
     _centerPhotoIndex = 0;
     _scrollView = nil;
     _photoStatusView = nil;
-    _toolbar = nil;
+    //_toolbar = nil;
     _defaultImage = nil;
     _captionStyle = nil;
-    _nextButton = nil;
-    _previousButton = nil;
+    //_nextButton = nil;
+   // _previousButton = nil;
     _statusText = nil;
     _thumbsController = nil;
     _slideshowTimer = nil;
@@ -377,21 +378,21 @@ static const NSInteger kActivityLabelTag = 96;
   _scrollView.backgroundColor = [UIColor blackColor];
   _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
   [_innerView addSubview:_scrollView];
-  
+  /*
   _nextButton = [[UIBarButtonItem alloc] initWithImage:
     TTIMAGE(@"bundle://Three20.bundle/images/nextIcon.png")
      style:UIBarButtonItemStylePlain target:self action:@selector(nextAction)];
   _previousButton = [[UIBarButtonItem alloc] initWithImage:
     TTIMAGE(@"bundle://Three20.bundle/images/previousIcon.png")
      style:UIBarButtonItemStylePlain target:self action:@selector(previousAction)];
+*/
+ // UIBarButtonItem* playButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:
+ //   UIBarButtonSystemItemPlay target:self action:@selector(playAction)] autorelease];
+  //playButton.tag = 1;
 
-  UIBarButtonItem* playButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:
-    UIBarButtonSystemItemPlay target:self action:@selector(playAction)] autorelease];
-  playButton.tag = 1;
-
-  UIBarItem* space = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:
-   UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
-
+//  UIBarItem* space = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:
+ //  UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+/*
   _toolbar = [[UIToolbar alloc] initWithFrame:
     CGRectMake(0, screenFrame.size.height - TT_ROW_HEIGHT,
                screenFrame.size.width, TT_ROW_HEIGHT)];
@@ -399,7 +400,7 @@ static const NSInteger kActivityLabelTag = 96;
   _toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
   _toolbar.items = [NSArray arrayWithObjects:
                    space, _previousButton, space, _nextButton, space, nil];
-  [_innerView addSubview:_toolbar];    
+  [_innerView addSubview:_toolbar];*/   
 }
 
 - (void)viewDidUnload {
@@ -409,9 +410,9 @@ static const NSInteger kActivityLabelTag = 96;
   TT_RELEASE_SAFELY(_innerView);
   TT_RELEASE_SAFELY(_scrollView);
   TT_RELEASE_SAFELY(_photoStatusView);
-  TT_RELEASE_SAFELY(_nextButton);
-  TT_RELEASE_SAFELY(_previousButton);
-  TT_RELEASE_SAFELY(_toolbar);
+//  TT_RELEASE_SAFELY(_nextButton);
+//  TT_RELEASE_SAFELY(_previousButton);
+//  TT_RELEASE_SAFELY(_toolbar);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -440,7 +441,7 @@ static const NSInteger kActivityLabelTag = 96;
 }
 
 - (UIView *)rotatingFooterView {
-  return _toolbar;
+	return nil;//_toolbar;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -450,8 +451,8 @@ static const NSInteger kActivityLabelTag = 96;
   [super showBars:show animated:animated];
 
   CGFloat alpha = show ? 1 : 0;
-  if (alpha == _toolbar.alpha)
-    return;
+ // if (alpha == _toolbar.alpha)
+  //  return;
   
   if (animated) {
     [UIView beginAnimations:nil context:nil];
@@ -472,7 +473,7 @@ static const NSInteger kActivityLabelTag = 96;
 
   [self showCaptions:show];
   
-  _toolbar.alpha = alpha;
+  //_toolbar.alpha = alpha;
   
   if (animated) {
     [UIView commitAnimations];
@@ -643,7 +644,7 @@ static const NSInteger kActivityLabelTag = 96;
     photoView = [self createPhotoView];
     photoView.captionStyle = _captionStyle;
     photoView.defaultImage = _defaultImage;
-    photoView.hidesCaption = _toolbar.alpha == 0;
+    //photoView.hidesCaption = _toolbar.alpha == 0;
   }
 
   id<TTPhoto> photo = [_photoSource photoAtIndex:pageIndex];

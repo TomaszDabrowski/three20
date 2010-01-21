@@ -28,9 +28,9 @@
   UIView* _innerView;
   TTScrollView* _scrollView;
   TTPhotoView* _photoStatusView;
-  UIToolbar* _toolbar;
-  UIBarButtonItem* _nextButton;
-  UIBarButtonItem* _previousButton;
+//  UIToolbar* _toolbar;
+//  UIBarButtonItem* _nextButton;
+//  UIBarButtonItem* _previousButton;
   TTStyle* _captionStyle;
   UIImage* _defaultImage;
   NSString* _statusText;
@@ -38,6 +38,7 @@
   NSTimer* _slideshowTimer;
   NSTimer* _loadTimer;
   BOOL _delayLoad;
+  int startIndex;
 }
 
 /**
@@ -71,7 +72,7 @@
 @property(nonatomic,retain) TTStyle* captionStyle;
 
 - (id)initWithPhoto:(id<TTPhoto>)photo;
-- (id)initWithPhotoSource:(id<TTPhotoSource>)photoSource;
+- (id)initWithPhotoSource:(id<TTPhotoSource>)photoSource;// selectedIndex:(int)index;
 
 /**
  * Creates a photo view for a new page.

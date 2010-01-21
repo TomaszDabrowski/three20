@@ -168,22 +168,6 @@ static NSMutableDictionary* gPopupViewControllers = nil;
   return nil;
 }
 
-#ifdef DEBUG
-
-/**
- * The view controller that comes before this one in a navigation controller's history.
- *
- * This has been deprecated due to App Store rejections. Please use ttPreviousViewController
- * from now on.
- *
- * @deprecated
- */
-- (UIViewController*)previousViewController {
-  return [self ttPreviousViewController];
-}
-
-#endif
-
 - (UIViewController*)nextViewController {
   NSArray* viewControllers = self.navigationController.viewControllers;
   if (viewControllers.count > 1) {
