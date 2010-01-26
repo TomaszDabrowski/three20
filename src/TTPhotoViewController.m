@@ -28,8 +28,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // global
 
-static const NSTimeInterval kPhotoLoadLongDelay = 0.5;
-static const NSTimeInterval kPhotoLoadShortDelay = 0.25;
+static const NSTimeInterval kPhotoLoadLongDelay = 0.1;
+static const NSTimeInterval kPhotoLoadShortDelay = 0.01;
 static const NSTimeInterval kSlideshowInterval = 2;
 static const NSInteger kActivityLabelTag = 96;
 
@@ -86,7 +86,7 @@ static const NSInteger kActivityLabelTag = 96;
     self.title = _photoSource.title;
   } else {
     self.title = [NSString stringWithFormat:
-      TTLocalizedString(@"%d of %d", @"Current page in photo browser (1 of 10)"),
+      NSLocalizedString(@"%d of %d", @"Current page in photo browser (1 of 10)"),
       _centerPhotoIndex+1, _photoSource.numberOfPhotos];
   }
 /*
@@ -341,7 +341,7 @@ static const NSInteger kActivityLabelTag = 96;
     self.wantsFullScreenLayout = YES;
     self.hidesBottomBarWhenPushed = YES;
 
-    self.defaultImage = TTIMAGE(@"bundle://Three20.bundle/images/photoDefault.png");
+	  self.defaultImage = nil;//TTIMAGE(@"bundle://Three20.bundle/images/photoDefault.png");
   }
   return self;
 }
