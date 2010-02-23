@@ -28,8 +28,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // global
 
-static const NSTimeInterval kPhotoLoadLongDelay = 0.1;
-static const NSTimeInterval kPhotoLoadShortDelay = 0.01;
+static const NSTimeInterval kPhotoLoadLongDelay = 0.05;
+static const NSTimeInterval kPhotoLoadShortDelay = 0.001;
 static const NSTimeInterval kSlideshowInterval = 2;
 static const NSInteger kActivityLabelTag = 96;
 
@@ -450,7 +450,7 @@ static const NSInteger kActivityLabelTag = 96;
 - (void)showBars:(BOOL)show animated:(BOOL)animated {
   [super showBars:show animated:animated];
 
-  CGFloat alpha = show ? 1 : 0;
+ // CGFloat alpha = show ? 1 : 0;
  // if (alpha == _toolbar.alpha)
   //  return;
   

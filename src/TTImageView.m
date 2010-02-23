@@ -125,7 +125,7 @@
 
 - (void)drawContent:(CGRect)rect {
   if (_image) {
-    [_image drawInRect:rect contentMode:self.contentMode];
+	  [_image drawInRect:rect contentMode:UIViewContentModeScaleAspectFit];// self.contentMode];
   } else {
     [_defaultImage drawInRect:rect contentMode:self.contentMode];
   }
@@ -151,9 +151,27 @@
   }
 }
 
+- (UIImage*) makeAspect:(UIImage*)image
+{	
+	CGImageRef imgRef = image.CGImage;
+	CGFloat width = CGImageGetWidth(imgRef);
+	CGFloat height = CGImageGetHeight(imgRef);
+	float ratio  =(height/width);
+	if (ratio >= 1.5) return image;
+	CGSize ss = CGSizeMake(400, 600);
+	UIGraphicsBeginImageContext(ss);	
+	float hh = 400*ratio;
+	float yy = (600 - hh)/2;
+	CGRect r3 = CGRectMake(0, yy, 400, hh);
+	[image drawInRect:r3];
+	UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();	
+	return imageCopy;
+}
+
 - (void)requestDidFinishLoad:(TTURLRequest*)request {
   TTURLImageResponse* response = request.response;
-  self.image = response.image;
+	self.image = [self makeAspect:response.image];
   
   TT_RELEASE_SAFELY(_request);
 }

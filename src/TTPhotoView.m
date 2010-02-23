@@ -77,6 +77,8 @@
     _photoVersion = TTPhotoVersionNone;
     _hidesExtras = NO;
     _hidesCaption = NO;
+	  
+	  self.style = nil;
     
     self.clipsToBounds = NO;
   }
@@ -102,7 +104,7 @@
     if (image == _defaultImage) {
       self.contentMode = UIViewContentModeCenter;
     } else {
-      self.contentMode = UIViewContentModeScaleAspectFill;
+		self.contentMode = UIViewContentModeScaleAspectFit;
     }
     [super setImage:image];
   }
