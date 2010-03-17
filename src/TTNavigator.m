@@ -372,7 +372,10 @@
 - (UIViewController*)topViewController {
   UIViewController* controller = _rootViewController;
   while (controller) {
-    UIViewController* child = controller.modalViewController;
+    UIViewController* child = controller.popupViewController;
+    if (!child) {
+      child = controller.modalViewController;
+    }
     if (!child) {
       child = controller.topSubcontroller;
     }
