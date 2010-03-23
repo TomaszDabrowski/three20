@@ -98,8 +98,12 @@ static const CGFloat kSectionHeaderHeight = 35;
         = (TTTableMoreButtonCell*)[tableView cellForRowAtIndexPath:indexPath];
       cell.animating = YES;
       [tableView deselectRowAtIndexPath:indexPath animated:YES];
-      
-      [_controller.model load:TTURLRequestCachePolicyDefault more:YES];
+
+      if (moreLink.model) {
+        [moreLink.model load:TTURLRequestCachePolicyDefault more:YES];
+      } else {
+        [_controller.model load:TTURLRequestCachePolicyDefault more:YES];
+      }
     }
   }
 
@@ -140,7 +144,7 @@ static const CGFloat kSectionHeaderHeight = 35;
   [TTURLRequestQueue mainQueue].suspended = YES;
 
   [_controller didBeginDragging];
-  
+
   if ([scrollView isKindOfClass:[TTTableView class]]) {
     TTTableView* tableView = (TTTableView*)scrollView;
     tableView.highlightedLabel.highlightedNode = nil;
